@@ -6,50 +6,56 @@
     <title>Aditya Bajpai - Personal Website</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background: orange;
             color: #333;
         }
         .container {
-            width: 80%;
+            width: 90%;
+            max-width: 1000px;
             margin: auto;
             overflow: hidden;
         }
         header {
             background: #333;
             color: #fff;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #77b5fe 3px solid;
+            padding: 30px 0;
+            text-align: center;
+            border-bottom: #77b5fe 4px solid;
         }
         header h1 {
-            text-align: center;
-            text-transform: uppercase;
             margin: 0;
-            font-size: 24px;
+            font-size: 32px;
+            animation: fadeIn 2s ease-in-out;
         }
         nav {
             margin-top: 10px;
-            text-align: center;
         }
         nav a {
             color: #fff;
             text-decoration: none;
-            margin: 0 15px;
+            margin: 0 20px;
             font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #77b5fe;
         }
         .main {
-            padding: 20px;
             background: #fff;
+            padding: 30px;
             margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            animation: slideUp 1s ease;
         }
         .main h2 {
             margin-top: 0;
         }
-        .main p {
-            line-height: 1.6;
+        .main ul {
+            padding-left: 20px;
         }
         footer {
             text-align: center;
@@ -58,6 +64,16 @@
             color: #fff;
             margin-top: 20px;
         }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -65,8 +81,8 @@
         <div class="container">
             <h1>Aditya Bajpai</h1>
             <nav>
-                <a href="#about"> A Little About Me</a>
-                <a href="#work">My School & Other Information </a>
+                <a href="#about">About Me</a>
+                <a href="#work">My School</a>
                 <a href="#contact">Contact</a>
             </nav>
         </div>
@@ -75,30 +91,50 @@
     <div class="container">
         <section id="about" class="main">
             <h2>A Little About Me</h2>
-            <p>Hello! My name is Aditya Bajpai. I am a student with a passion for learning actual tech how the internet works. I specialize in Making basic word documents , power point presentation and stuff , and I have been student for about 15 years. My goal in life is to make people aware of basic thing can be done with love and a crazy twist .</p>
+            <p>Hello! My name is Aditya Bajpai. I am a student with a passion for learning how the internet works. I specialize in creating basic Word documents, PowerPoint presentations, and more. I've been a student for about 15 years and aim to show how even simple things can be done with love and creativity!</p>
         </section>
 
         <section id="work" class="main">
-            <h2>My School </h2>
-            <p>I have studing in a School known as St. Joesph's college , Its a great to see my friends everyday and learn something new , and I enjoy taking on small and simple challenges that allow me to grow in life.</p>
+            <h2>My School</h2>
+            <p>I study at St. Joseph's College. It's wonderful to meet my friends every day, learn something new, and face small challenges that help me grow.</p>
             <p>Here are some examples of my projects:</p>
             <ul>
-                <li>Project 1: My work with Shaurya&Satwik on making a powerpoint for the Association of  Luminaries.Prize Incoming! </li>
-                <li>Project 2: My work with Hydiansh on making a powerpoint for the  I.T Association . Won 2nd Prize </li>
-                <li>Project 3: My work with Daksh,Hydiansh,Ajinkya Verdhan on making a biology project on development of cells for Science the association. Won 1st Prize </li>
+                <li><strong>Project 1:</strong> Member of NCC Unit , passed with A certificate.</li>
+                <li><strong>Project 2:</strong> Worked with Shaurya & Satwik on a PowerPoint for the Association of Luminaries.</li>
+                <li><strong>Project 3:</strong> Collaborated with Hydiansh on a PowerPoint for the IT Association. (Won 2nd Prize)</li>
+                <li><strong>Project 4:</strong> Teamed up with Daksh, Hridyansh & Ajinkya Verdhan for a biology project on cell development for the Science Association. (Won 1st Prize)</li>
             </ul>
         </section>
 
         <section id="contact" class="main">
             <h2>Contact Me</h2>
-            <p>If you would like to get in touch with me, you can reach me at:</p>
-            <p>Email: bajpainishu51@gmail.com</p>
+            <p>If you would like to get in touch, you can reach me at:</p>
+            <p>Email: <a href="mailto:aiyapi@proton.me">aiyapi@proton.me</a></p>
             <p>Feel free to reach out for collaboration or any inquiries.</p>
         </section>
     </div>
 
     <footer>
-        <p>&copy; 2024 - Aditya Bajpai. All rights are reserved :) . Thanks for viewing my website </p>
+        <p>&copy; 2025 - Aditya Bajpai. All rights reserved :) Thanks for visiting!</p>
     </footer>
+
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add a simple greeting alert when the page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                alert("Welcome to Aditya Bajpai's Website!");
+            }, 500);
+        });
+    </script>
 </body>
 </html>
