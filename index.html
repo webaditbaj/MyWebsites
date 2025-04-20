@@ -1,257 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aditya Bajpai - Personal Website</title>
-    <style>
-        :root {
-            --primary-color: #005AFF;
-            --bg-color: orange;
-            --text-color: #333;
-            --white: #fff;
-            --card-bg: #fff;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aditya Bajπ - Personal Website</title>
+  <style>
+    :root {
+      --primary-color: #005AFF;
+      --bg-color: orange;
+      --text-color: #333;
+      --white: #fff;
+      --card-bg: #fff;
+      --header-bg: #005AFF;
+    }
 
-        body.dark-mode {
-            --bg-color: #121212;
-            --text-color: #f5f5f5;
-            --card-bg: #1e1e1e;
-        }
+    body.dark-mode {
+      --bg-color: var(--primary-color);
+      --header-bg: orange;
+      --text-color: #f5f5f5;
+      --card-bg: #1e1e1e;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: var(--bg-color);
-            color: var(--text-color);
-            transition: all 0.3s ease;
-        }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.6s ease, color 0.6s ease;
+    }
 
-        .container {
-            width: 90%;
-            max-width: 1000px;
-            margin: auto;
-        }
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: auto;
+    }
 
-        header {
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 30px 0;
-            text-align: center;
-            position: relative;
-        }
+    header {
+      background: var(--header-bg);
+      color: var(--white);
+      padding: 30px 0;
+      text-align: center;
+      position: relative;
+      transition: background-color 0.6s ease, color 0.6s ease;
+    }
 
-        header h1 span.typing {
-            border-right: 2px solid #fff;
-            animation: blink 0.7s steps(1) infinite;
-        }
+    header h1 span.typing {
+      border-right: 2px solid #fff;
+      animation: blink 0.7s steps(1) infinite;
+    }
 
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
 
-        nav {
-            margin-top: 10px;
-        }
+    nav {
+      margin-top: 10px;
+    }
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 20px;
-            font-size: 18px;
-            position: relative;
-        }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 18px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: #77b5fe;
-            transition: width 0.3s;
-        }
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: #77b5fe;
+      transition: width 0.3s;
+    }
 
-        nav a:hover::after {
-            width: 100%;
-        }
+    nav a:hover::after {
+      width: 100%;
+    }
 
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #fff;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-        }
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s ease;
+    }
 
-        .main {
-            background: var(--card-bg);
-            padding: 30px;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transform: translateY(50px);
-            opacity: 0;
-            transition: all 1s ease;
-        }
+    .main {
+      background: var(--card-bg);
+      padding: 30px;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transform: translateY(50px);
+      opacity: 0;
+      transition: all 1s ease, background-color 0.6s ease, color 0.6s ease;
+    }
 
-        .main.visible {
-            transform: translateY(0);
-            opacity: 1;
-        }
+    .main.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
 
-        footer {
-            background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
-            color: #fff;
-            margin-top: 20px;
-            padding: 20px;
-            text-align: center;
-        }
+    footer {
+      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+      color: #fff;
+      margin-top: 20px;
+      padding: 20px;
+      text-align: center;
+    }
 
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #333;
-            color: #fff;
-            padding: 12px 20px;
-            border-radius: 8px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
-            z-index: 999;
-        }
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #333;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+      z-index: 999;
+    }
 
-        .toast.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        #scrollTopBtn {
-            position: fixed;
-            bottom: 40px;
-            left: 30px;
-            display: none;
-            padding: 10px 16px;
-            background: var(--primary-color);
-            color: #fff;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-        }
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 40px;
+      left: 30px;
+      display: none;
+      padding: 10px 16px;
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
 
-        a {
-            color: var(--primary-color);
-        }
-    </style>
+    a {
+      color: var(--primary-color);
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <button class="theme-toggle">Toggle Theme</button>
-        <div class="container">
-            <h1><span class="typing" id="typed-text"></span></h1>
-            <nav>
-                <a href="#about">About Me</a>
-                <a href="#work">My School</a>
-                <a href="#contact">Contact</a>
-            </nav>
-        </div>
-    </header>
-
+  <header>
+    <button class="theme-toggle">Toggle Theme</button>
     <div class="container">
-        <section id="about" class="main">
-            <h2>A Little About Me</h2>
-            <p>Hello! My name is Aditya Bajpai. I am a student with a passion for learning how the internet works. I specialize in creating basic Word documents, PowerPoint presentations, and more. I've been a student for about 15 years and aim to show how even simple things can be done with love and creativity!</p>
-        </section>
-
-        <section id="work" class="main">
-            <h2>My School</h2>
-            <p>I study at St. Joseph's College. It's wonderful to meet my friends every day, learn something new, and face small challenges that help me grow.</p>
-            <p>Here are some of my Achievements:</p>
-            <ul>
-                <li><strong>Achievement 1:</strong> Member of NCC Unit, Got 'A' certificate with 'A' grade.</li>
-                <li><strong>Achievement 2:</strong> Worked with Shaurya & Satwik on a PowerPoint for the Association of Luminaries.</li>
-                <li><strong>Achievement 3:</strong> Collaborated with Hydiansh on a PowerPoint for the IT Association.</li>
-                <li><strong>Achievement 4:</strong> Teamed up with Daksh, Hridyansh & Ajinkya Verdhan for a biology project on cell development for the Science Association.</li>
-                <li><strong>Achievement 5:</strong> Got in the Inder Mohan Sethi Debate.</li>
-            </ul>
-        </section>
-
-        <section id="contact" class="main">
-            <h2>Contact Me</h2>
-            <p>If you would like to get in touch, you can reach me at:</p>
-            <p>Email: <a href="mailto:aiyapi@proton.me">aiyapi@proton.me</a></p>
-            <p>Feel free to reach out for collaboration or any inquiries.</p>
-        </section>
+      <h1><span class="typing" id="typed-text"></span></h1>
+      <nav>
+        <a href="#about">About Me</a>
+        <a href="#work">My School</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
+  </header>
 
-    <footer>
-        <p>&copy; 2025 - Aditya Bajpai. All rights reserved :) Thanks for visiting!</p>
-    </footer>
+  <div class="container">
+    <section id="about" class="main">
+      <h2>A Little About Me</h2>
+      <p>Hello! My name is Aditya Bajpai. I am a student with a passion for learning how the internet works. I specialize in creating basic Word documents, PowerPoint presentations, and more. I've been a student for about 15 years and aim to show how even simple things can be done with love and creativity!</p>
+    </section>
 
-    <button id="scrollTopBtn">↑ Top</button>
-    <div class="toast" id="toast">Welcome to Aditya Bajpai's Website!</div>
+    <section id="work" class="main">
+      <h2>My School</h2>
+      <p>I study at St. Joseph's College. It's wonderful to meet my friends every day, learn something new, and face small challenges that help me grow.</p>
+      <p>Here are some of my Achievements:</p>
+      <ul>
+        <li><strong>Achievement 1:</strong> Member of NCC Unit, Got 'A' certificate with 'A' grade.</li>
+        <li><strong>Achievement 2:</strong> Worked with Shaurya & Satwik on a PowerPoint for the Association of Luminaries.</li>
+        <li><strong>Achievement 3:</strong> Collaborated with Hydiansh on a PowerPoint for the IT Association.</li>
+        <li><strong>Achievement 4:</strong> Teamed up with Daksh, Hridyansh & Ajinkya Verdhan for a biology project on cell development for the Science Association.</li>
+        <li><strong>Achievement 5:</strong> Certificate of merit in the Inder Mohan Sethi Debate Competition.</li>
+      </ul>
+    </section>
 
-    <script>
-        // Typing effect
-        const text = "Aditya Bajpai";
-        const typedText = document.getElementById("typed-text");
-        let i = 0;
+    <section id="contact" class="main">
+      <h2>Contact Me</h2>
+      <p>If you would like to get in touch, you can reach me at:</p>
+      <p>Email: <a href="mailto:aiyapi@proton.me">aiyapi@proton.me</a></p>
+      <p>Feel free to reach out for collaboration or any inquiries.</p>
+    </section>
+  </div>
 
-        function typeWriter() {
-            if (i < text.length) {
-                typedText.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 150);
-            }
+  <footer>
+    <p>&copy; 2025 - Aditya Bajpai. All rights reserved :) Thanks for visiting!</p>
+  </footer>
+
+  <button id="scrollTopBtn">↑ Top</button>
+  <div class="toast" id="toast">Welcome to Aditya Bajπ's Website!</div>
+
+  <script>
+    // Typing effect
+    const text = "Aditya Bajpai";
+    const typedText = document.getElementById("typed-text");
+    let i = 0;
+
+    function typeWriter() {
+      if (i < text.length) {
+        typedText.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 150);
+      }
+    }
+    typeWriter();
+
+    // Smooth scroll
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const section = document.querySelector(link.getAttribute('href'));
+        section.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Animate sections on scroll
+    const sections = document.querySelectorAll(".main");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
         }
-        typeWriter();
+      });
+    }, { threshold: 0.1 });
 
-        // Smooth scroll
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', e => {
-                e.preventDefault();
-                const section = document.querySelector(link.getAttribute('href'));
-                section.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
+    sections.forEach(section => observer.observe(section));
 
-        // Animate sections on scroll
-        const sections = document.querySelectorAll(".main");
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                }
-            });
-        }, { threshold: 0.1 });
+    // Theme toggle
+    document.querySelector(".theme-toggle").addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+    });
 
-        sections.forEach(section => observer.observe(section));
+    // Toast message
+    const toast = document.getElementById("toast");
+    setTimeout(() => toast.classList.add("show"), 1000);
+    setTimeout(() => toast.classList.remove("show"), 5000);
 
-        // Theme toggle
-        document.querySelector(".theme-toggle").addEventListener("click", () => {
-            document.body.classList.toggle("dark-mode");
-        });
-
-        // Toast message
-        const toast = document.getElementById("toast");
-        setTimeout(() => toast.classList.add("show"), 1000);
-        setTimeout(() => toast.classList.remove("show"), 5000);
-
-        // Scroll to top button
-        const scrollTopBtn = document.getElementById("scrollTopBtn");
-        window.addEventListener("scroll", () => {
-            scrollTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
-        });
-        scrollTopBtn.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-    </script>
+    // Scroll to top button
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    window.addEventListener("scroll", () => {
+      scrollTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
+    });
+    scrollTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
 </body>
 </html>
+//Peekaboo I just put their boggers in their chains , Peekaboo 762 A Koby Game , Peekaboo
