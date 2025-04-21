@@ -4,70 +4,49 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Aditya Bajπ - Personal Website</title>
-  <!-- Using a modern Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-color: #0D47A1;
-      --secondary-color: #1976D2;
-      --bg-color: #f5f5f5;
+      --primary-color: #005AFF;
+      --bg-color: orange;
       --text-color: #333;
       --white: #fff;
       --card-bg: #fff;
-      --header-bg: linear-gradient(135deg, #0D47A1, #1976D2);
+      --header-bg: #005AFF;
     }
 
-    /* Dark mode variables */
     body.dark-mode {
-      --bg-color: #121212;
-      --text-color: #ccc;
+      --bg-color: var(--primary-color);
+      --header-bg: orange;
+      --text-color: #f5f5f5;
       --card-bg: #1e1e1e;
-      --header-bg: linear-gradient(135deg, #1976D2, #0D47A1);
-    }
-
-    /* Reset and basic styling */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
       background: var(--bg-color);
       color: var(--text-color);
       transition: background-color 0.6s ease, color 0.6s ease;
     }
 
-    /* Container - adds top margin to avoid fixed header overlap */
     .container {
       width: 90%;
       max-width: 1000px;
-      margin: 80px auto 20px;
+      margin: auto;
     }
 
-    /* Fixed header with a modern gradient and drop shadow */
     header {
       background: var(--header-bg);
       color: var(--white);
-      padding: 20px 0;
+      padding: 30px 0;
       text-align: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      transition: background 0.6s ease;
-    }
-
-    header h1 {
-      margin-bottom: 10px;
-      font-size: 2.2rem;
+      position: relative;
+      transition: background-color 0.6s ease, color 0.6s ease;
     }
 
     header h1 span.typing {
-      border-right: 2px solid var(--white);
+      border-right: 2px solid #fff;
       animation: blink 0.7s steps(1) infinite;
     }
 
@@ -80,16 +59,12 @@
     }
 
     nav a {
-      color: var(--white);
+      color: #fff;
       text-decoration: none;
       margin: 0 20px;
-      font-size: 1.1rem;
+      font-size: 18px;
       position: relative;
-      transition: color 0.3s ease, transform 0.3s ease;
-    }
-
-    nav a:hover {
-      transform: translateY(-3px);
+      transition: color 0.3s ease;
     }
 
     nav a::after {
@@ -99,34 +74,27 @@
       height: 2px;
       bottom: -5px;
       left: 0;
-      background: var(--secondary-color);
-      transition: width 0.3s ease;
+      background: #77b5fe;
+      transition: width 0.3s;
     }
 
     nav a:hover::after {
       width: 100%;
     }
 
-    /* Modern theme toggle button with icon changes */
     .theme-toggle {
       position: absolute;
-      top: 15px;
+      top: 20px;
       right: 20px;
-      background: var(--white);
+      background: #fff;
       border: none;
-      padding: 8px;
-      border-radius: 50%;
+      padding: 8px 12px;
+      border-radius: 20px;
       cursor: pointer;
-      font-size: 1.2rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      transition: transform 0.3s ease, background 0.3s ease;
+      font-size: 14px;
+      transition: background 0.3s ease;
     }
 
-    .theme-toggle:hover {
-      transform: scale(1.1);
-    }
-
-    /* Main sections with smooth slide-up animations */
     .main {
       background: var(--card-bg);
       padding: 30px;
@@ -135,7 +103,7 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       transform: translateY(50px);
       opacity: 0;
-      transition: transform 1s ease, opacity 1s ease;
+      transition: all 1s ease, background-color 0.6s ease, color 0.6s ease;
     }
 
     .main.visible {
@@ -143,46 +111,25 @@
       opacity: 1;
     }
 
-    section h2 {
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-      color: var(--primary-color);
-      border-bottom: 2px solid var(--secondary-color);
-      padding-bottom: 5px;
-    }
-
-    section p {
-      line-height: 1.6;
-      margin-bottom: 15px;
-    }
-
-    ul {
-      margin-left: 20px;
-      list-style: disc;
-    }
-
-    /* Updated footer with modern visual balance */
     footer {
-      background: var(--primary-color);
-      color: var(--white);
-      margin-top: 40px;
+      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+      color: #fff;
+      margin-top: 20px;
       padding: 20px;
       text-align: center;
-      font-size: 0.9rem;
     }
 
-    /* Snacky toast notification style */
     .toast {
       position: fixed;
       bottom: 30px;
       right: 30px;
-      background: rgba(51, 51, 51, 0.9);
-      color: var(--white);
+      background: #333;
+      color: #fff;
       padding: 12px 20px;
       border-radius: 8px;
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition: all 0.5s ease;
       z-index: 999;
     }
 
@@ -191,7 +138,6 @@
       transform: translateY(0);
     }
 
-    /* Stylish scroll-to-top button */
     #scrollTopBtn {
       position: fixed;
       bottom: 40px;
@@ -199,32 +145,20 @@
       display: none;
       padding: 10px 16px;
       background: var(--primary-color);
-      color: var(--white);
+      color: #fff;
       border: none;
       border-radius: 20px;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      transition: background 0.3s ease, transform 0.3s ease;
-    }
-
-    #scrollTopBtn:hover {
-      transform: scale(1.05);
     }
 
     a {
       color: var(--primary-color);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    a:hover {
-      color: var(--secondary-color);
     }
   </style>
 </head>
 <body>
   <header>
-    <button class="theme-toggle" id="themeToggle">🌞</button>
+    <button class="theme-toggle">Toggle Theme</button>
     <div class="container">
       <h1><span class="typing" id="typed-text"></span></h1>
       <nav>
@@ -238,19 +172,19 @@
   <div class="container">
     <section id="about" class="main">
       <h2>A Little About Me</h2>
-      <p>Hello! My name is Aditya Bajpai. I am a student with a passion for learning how the internet works. I specialize in creating Word documents, PowerPoint presentations, and more. I’ve been a student for about 15 years and aim to show how even simple tasks can be done with creativity and heart.</p>
+      <p>Hello! My name is Aditya Bajpai. I am a student with a passion for learning how the internet works. I specialize in creating basic Word documents, PowerPoint presentations, and more. I've been a student for about 15 years and aim to show how even simple things can be done with love and creativity!</p>
     </section>
 
     <section id="work" class="main">
       <h2>My School</h2>
-      <p>I study at St. Joseph's College. It's wonderful to meet my friends every day, learn something new, and tackle challenges that help me grow.</p>
-      <p>Here are some of my achievements:</p>
+      <p>I study at St. Joseph's College. It's wonderful to meet my friends every day, learn something new, and face small challenges that help me grow.</p>
+      <p>Here are some of my Achievements:</p>
       <ul>
-        <li><strong>Achievement 1:</strong> Member of NCC Unit, received an 'A' certificate with 'A' grade.</li>
-        <li><strong>Achievement 2:</strong> Collaborated with Shaurya & Satwik on a PowerPoint for the Association of Luminaries.</li>
-        <li><strong>Achievement 3:</strong> Worked with Hydiansh on a PowerPoint for the IT Association.</li>
+        <li><strong>Achievement 1:</strong> Member of NCC Unit, Got 'A' certificate with 'A' grade.</li>
+        <li><strong>Achievement 2:</strong> Worked with Shaurya & Satwik on a PowerPoint for the Association of Luminaries.</li>
+        <li><strong>Achievement 3:</strong> Collaborated with Hydiansh on a PowerPoint for the IT Association.</li>
         <li><strong>Achievement 4:</strong> Teamed up with Daksh, Hridyansh & Ajinkya Verdhan for a biology project on cell development for the Science Association.</li>
-        <li><strong>Achievement 5:</strong> Earned a certificate of merit in the Inder Mohan Sethi Debate Competition.</li>
+        <li><strong>Achievement 5:</strong> Certificate of merit in the Inder Mohan Sethi Debate Competition.</li>
       </ul>
     </section>
 
@@ -258,22 +192,23 @@
       <h2>Contact Me</h2>
       <p>If you would like to get in touch, you can reach me at:</p>
       <p>Email: <a href="mailto:aiyapi@proton.me">aiyapi@proton.me</a></p>
-      <p>Feel free to reach out for collaboration or inquiries.</p>
+      <p>Feel free to reach out for collaboration or any inquiries.</p>
     </section>
   </div>
 
   <footer>
-    <p>&copy; 2025 - Aditya Bajpai. All rights reserved. Thanks for visiting!</p>
+    <p>&copy; 2025 - Aditya Bajpai. All rights reserved :) Thanks for visiting!</p>
   </footer>
 
   <button id="scrollTopBtn">↑ Top</button>
   <div class="toast" id="toast">Welcome to Aditya Bajπ's Website!</div>
 
   <script>
-    // Typing effect for the header text
+    // Typing effect
     const text = "Aditya Bajpai";
     const typedText = document.getElementById("typed-text");
     let i = 0;
+
     function typeWriter() {
       if (i < text.length) {
         typedText.textContent += text.charAt(i);
@@ -283,7 +218,7 @@
     }
     typeWriter();
 
-    // Smooth scroll for navigation links
+    // Smooth scroll
     document.querySelectorAll('nav a').forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
@@ -292,36 +227,35 @@
       });
     });
 
-    // Intersection Observer to animate sections on scroll
-    const sections = document.querySelectorAll('.main');
+    // Animate sections on scroll
+    const sections = document.querySelectorAll(".main");
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+          entry.target.classList.add("visible");
         }
       });
     }, { threshold: 0.1 });
+
     sections.forEach(section => observer.observe(section));
 
-    // Theme toggle switching between light (🌞) and dark (🌜)
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      themeToggle.textContent = document.body.classList.contains('dark-mode') ? '🌜' : '🌞';
+    // Theme toggle
+    document.querySelector(".theme-toggle").addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
     });
 
-    // Toast message display
-    const toast = document.getElementById('toast');
-    setTimeout(() => toast.classList.add('show'), 1000);
-    setTimeout(() => toast.classList.remove('show'), 5000);
+    // Toast message
+    const toast = document.getElementById("toast");
+    setTimeout(() => toast.classList.add("show"), 1000);
+    setTimeout(() => toast.classList.remove("show"), 5000);
 
-    // Scroll-to-top button functionality
-    const scrollTopBtn = document.getElementById('scrollTopBtn');
-    window.addEventListener('scroll', () => {
-      scrollTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    // Scroll to top button
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    window.addEventListener("scroll", () => {
+      scrollTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
     });
-    scrollTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   </script>
 </body>
