@@ -95,6 +95,11 @@
       transition: background 0.3s ease;
     }
 
+    body.dark-mode .theme-toggle {
+      background: #333;
+      color: #fff;
+    }
+
     .main {
       background: var(--card-bg);
       padding: 30px;
@@ -151,8 +156,27 @@
       cursor: pointer;
     }
 
+    iframe {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
     a {
       color: var(--primary-color);
+    }
+
+    .discord-stats {
+      margin-top: 15px;
+      font-size: 16px;
+    }
+
+    .discord-stats span {
+      font-weight: bold;
+    }
+
+    .loading {
+      font-style: italic;
+      color: gray;
     }
   </style>
 </head>
@@ -165,6 +189,7 @@
         <a href="#about">About Me</a>
         <a href="#work">My School</a>
         <a href="#contact">Contact</a>
+        <a href="#discord">Discord</a>
       </nav>
     </div>
   </header>
@@ -194,6 +219,16 @@
       <p>Email: <a href="mailto:aiyapi@proton.me">aiyapi@proton.me</a></p>
       <p>Feel free to reach out for collaboration or any inquiries.</p>
     </section>
+
+    <section id="discord" class="main">
+      <h2>Join My Discord Server</h2>
+      <p>Come hang out, ask questions, or just vibe with the community!</p>
+      <iframe src="https://discord.com/widget?id=1358872595604181155&theme=dark"
+              width="100%" height="500"
+              allowtransparency="true" frameborder="0"
+              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+      <div class="discord-stats loading" id="discordStats">Loading server stats...</div>
+    </section>
   </div>
 
   <footer>
@@ -207,8 +242,8 @@
     // Typing effect
     const text = "Aditya Bajpai";
     const typedText = document.getElementById("typed-text");
+    typedText.textContent = '';
     let i = 0;
-
     function typeWriter() {
       if (i < text.length) {
         typedText.textContent += text.charAt(i);
@@ -222,8 +257,8 @@
     document.querySelectorAll('nav a').forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
-        const section = document.querySelector(link.getAttribute('href'));
-        section.scrollIntoView({ behavior: 'smooth' });
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
       });
     });
 
@@ -236,7 +271,6 @@
         }
       });
     }, { threshold: 0.1 });
-
     sections.forEach(section => observer.observe(section));
 
     // Theme toggle
@@ -257,6 +291,23 @@
     scrollTopBtn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
+
+    // Fetch Discord JSON API Data
+    const discordStats = document.getElementById("discordStats");
+    fetch("https://discord.com/api/guilds/1358872595604181155/widget.json")
+      .then(res => res.json())
+      .then(data => {
+        discordStats.classList.remove("loading");
+        discordStats.innerHTML = `
+          <p><span>Server Name:</span> ${data.name}</p>
+          <p><span>Online Members:</span> ${data.presence_count}</p>
+        `;
+      })
+      .catch(err => {
+        discordStats.classList.remove("loading");
+        discordStats.innerHTML = "Could not load Discord server stats.";
+        console.error("Discord API error:", err);
+      });
   </script>
 </body>
 </html>
