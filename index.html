@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Aditya Bajπ - Personal Website</title>
+  <title>π - Personal Website</title>
+  <!-- Google Fonts for cool typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Animate.css for additional animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <style>
     :root {
       --primary-color: #005AFF;
@@ -12,6 +18,11 @@
       --white: #fff;
       --card-bg: #fff;
       --header-bg: #005AFF;
+      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --shadow-sm: 0 5px 20px rgba(0,0,0,0.1);
+      --shadow-md: 0 8px 30px rgba(0,0,0,0.15);
+      --shadow-lg: 0 15px 40px rgba(0,0,0,0.2);
     }
 
     body.dark-mode {
@@ -19,34 +30,169 @@
       --header-bg: orange;
       --text-color: #f5f5f5;
       --card-bg: #1e1e1e;
+      --gradient-1: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+      --gradient-2: linear-gradient(135deg, #8e44ad 0%, #e74c3c 100%);
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
       background: var(--bg-color);
       color: var(--text-color);
       transition: background-color 0.6s ease, color 0.6s ease;
+      letter-spacing: -0.02em;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Floating Animation */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* Pulse Animation */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* Glow Animation */
+    @keyframes glow {
+      0% { box-shadow: 0 0 5px rgba(0,90,255,0.5); }
+      50% { box-shadow: 0 0 20px rgba(0,90,255,0.8); }
+      100% { box-shadow: 0 0 5px rgba(0,90,255,0.5); }
+    }
+
+    /* Shimmer Animation */
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+
+    /* Bounce Animation */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Slide In Animation */
+    @keyframes slideIn {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Fade In Up Animation */
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* New enhanced animations */
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes scalePulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.03em;
     }
 
     .container {
       width: 90%;
       max-width: 1000px;
       margin: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Animated Background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(0,90,255,0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(255,165,0,0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+      animation: gradientShift 15s ease infinite;
+      background-size: 200% 200%;
     }
 
     header {
       background: var(--header-bg);
       color: var(--white);
-      padding: 30px 0;
+      padding: 40px 0;
       text-align: center;
       position: relative;
       transition: background-color 0.6s ease, color 0.6s ease;
+      border-bottom: 4px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+      animation: slideIn 1s ease-out;
+    }
+
+    /* Animated Header Background */
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+      animation: shimmer 8s linear infinite;
+      transform: rotate(45deg);
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      animation: float 6s ease-in-out infinite;
+      position: relative;
+      display: inline-block;
+    }
+
+    header h1::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #fff, transparent);
+      animation: shimmer 2s linear infinite;
     }
 
     header h1 span.typing {
-      border-right: 2px solid #fff;
+      border-right: 3px solid #fff;
       animation: blink 0.7s steps(1) infinite;
     }
 
@@ -55,7 +201,7 @@
     }
 
     nav {
-      margin-top: 10px;
+      margin-top: 20px;
     }
 
     nav a {
@@ -63,19 +209,29 @@
       text-decoration: none;
       margin: 0 20px;
       font-size: 18px;
+      font-weight: 500;
       position: relative;
-      transition: color 0.3s ease;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      transform: translateY(-3px);
+      animation: pulse 1s ease-in-out;
     }
 
     nav a::after {
       content: '';
       position: absolute;
       width: 0;
-      height: 2px;
-      bottom: -5px;
+      height: 3px;
+      bottom: -8px;
       left: 0;
       background: #77b5fe;
       transition: width 0.3s;
+      border-radius: 2px;
     }
 
     nav a:hover::after {
@@ -88,11 +244,23 @@
       right: 20px;
       background: #fff;
       border: none;
-      padding: 8px 12px;
-      border-radius: 20px;
+      padding: 10px 16px;
+      border-radius: 30px;
       cursor: pointer;
       font-size: 14px;
-      transition: background 0.3s ease;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 10;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      animation: none;
     }
 
     body.dark-mode .theme-toggle {
@@ -102,13 +270,40 @@
 
     .main {
       background: var(--card-bg);
-      padding: 30px;
-      margin-top: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 40px;
+      margin-top: 30px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
       transform: translateY(50px);
       opacity: 0;
       transition: all 1s ease, background-color 0.6s ease, color 0.6s ease;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 1s ease-out forwards;
+    }
+
+    .main:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: var(--shadow-lg);
+      transition: all 0.3s ease;
+    }
+
+    /* Card Shimmer Effect */
+    .main::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.8s;
+    }
+
+    .main:hover::before {
+      left: 100%;
     }
 
     .main.visible {
@@ -116,26 +311,66 @@
       opacity: 1;
     }
 
+    .main h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+      position: relative;
+      display: inline-block;
+      animation: float 6s ease-in-out infinite;
+      background: linear-gradient(90deg, var(--primary-color), #ff6b6b, var(--primary-color));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 5s linear infinite, float 6s ease-in-out infinite;
+    }
+
+    .main h2::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), #ff6b6b);
+      border-radius: 2px;
+      animation: scalePulse 2s ease-in-out infinite;
+    }
+
     footer {
-      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+      background: var(--gradient-1);
       color: #fff;
-      margin-top: 20px;
-      padding: 20px;
+      margin-top: 40px;
+      padding: 30px;
       text-align: center;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+      /* Removed all animations from footer */
+    }
+
+    /* Footer Shimmer - Removed */
+    footer::before {
+      display: none;
     }
 
     .toast {
       position: fixed;
       bottom: 30px;
       right: 30px;
-      background: #333;
+      background: var(--gradient-2);
       color: #fff;
-      padding: 12px 20px;
-      border-radius: 8px;
+      padding: 14px 24px;
+      border-radius: 50px;
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.5s ease;
       z-index: 999;
+      font-weight: 500;
+      box-shadow: var(--shadow-md);
+      animation: bounce 2s ease-in-out infinite;
+      background-size: 200% 200%;
     }
 
     .toast.show {
@@ -148,99 +383,305 @@
       bottom: 40px;
       left: 30px;
       display: none;
-      padding: 10px 16px;
+      padding: 12px 20px;
       background: var(--primary-color);
       color: #fff;
       border: none;
-      border-radius: 20px;
+      border-radius: 30px;
       cursor: pointer;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+      animation: glow 2s ease-in-out infinite;
+      z-index: 100;
     }
 
+    #scrollTopBtn:hover {
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: var(--shadow-lg);
+      animation: none;
+    }
+
+    /* Iframes - No animations */
     iframe {
       max-width: 100%;
-      border-radius: 10px;
+      border-radius: 15px;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+      /* Removed animation */
+    }
+
+    iframe:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-lg);
     }
 
     a {
       color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
     }
 
+    a:hover {
+      color: #0044cc;
+      text-decoration: none;
+    }
+
+    a:hover::after {
+      content: '→';
+      position: absolute;
+      margin-left: 5px;
+      animation: bounce 0.5s ease-in-out;
+    }
+
+    /* Discord Stats - Clean version */
     .discord-stats {
-      margin-top: 15px;
+      margin-top: 20px;
       font-size: 16px;
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(0,90,255,0.05) 0%, rgba(255,165,0,0.05) 100%);
+      border-radius: 15px;
+      font-weight: 500;
+      border-left: 4px solid var(--primary-color);
+      transition: all 0.3s ease;
+    }
+
+    .discord-stats:hover {
+      transform: translateX(5px);
+      background: linear-gradient(135deg, rgba(0,90,255,0.1) 0%, rgba(255,165,0,0.1) 100%);
+    }
+
+    .discord-stats p {
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .discord-stats span {
-      font-weight: bold;
+      font-weight: 700;
+      color: var(--primary-color);
+      min-width: 120px;
+      display: inline-block;
+      padding: 5px 10px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
     }
 
+    /* Loading state */
     .loading {
       font-style: italic;
       color: gray;
+      position: relative;
+      padding-left: 35px;
+    }
+
+    .loading::before {
+      content: '⏳';
+      position: absolute;
+      left: 10px;
+      animation: none;
+    }
+
+    .spotify-section {
+      margin-top: 20px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    ul li {
+      margin-bottom: 15px;
+      padding-left: 25px;
+      position: relative;
+      transition: all 0.3s ease;
+      animation: slideIn 0.5s ease-out forwards;
+      animation-delay: calc(var(--i) * 0.1s);
+      opacity: 0;
+    }
+
+    ul li:hover {
+      transform: translateX(10px);
+      color: var(--primary-color);
+    }
+
+    ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--primary-color);
+      font-weight: bold;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    /* Floating Elements */
+    .floating-element {
+      position: fixed;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(0,90,255,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      animation: float 15s ease-in-out infinite;
+      filter: blur(20px);
+    }
+
+    .floating-element:nth-child(1) {
+      top: 10%;
+      left: 5%;
+      width: 200px;
+      height: 200px;
+      animation-delay: 0s;
+      background: radial-gradient(circle, rgba(255,165,0,0.1) 0%, transparent 70%);
+    }
+
+    .floating-element:nth-child(2) {
+      bottom: 15%;
+      right: 8%;
+      width: 250px;
+      height: 250px;
+      animation-delay: 3s;
+      background: radial-gradient(circle, rgba(0,90,255,0.1) 0%, transparent 70%);
+    }
+
+    .floating-element:nth-child(3) {
+      top: 40%;
+      right: 15%;
+      width: 180px;
+      height: 180px;
+      animation-delay: 6s;
+      background: radial-gradient(circle, rgba(255,105,180,0.1) 0%, transparent 70%);
+    }
+
+    /* Glitch Effect for Name */
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+
+    .typing {
+      animation: glitch 3s infinite;
+    }
+
+    /* New JavaScript-enhanced elements */
+    .js-highlight {
+      transition: all 0.3s ease;
+    }
+
+    .js-highlight.active {
+      background: linear-gradient(135deg, rgba(0,90,255,0.2) 0%, rgba(255,165,0,0.2) 100%);
+      transform: scale(1.02);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Achievement badges */
+    .achievement-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 20px;
+      font-size: 12px;
+      margin-left: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .achievement-badge:hover {
+      transform: rotate(360deg);
+      background: #ff6b6b;
     }
   </style>
 </head>
 <body>
+  <!-- Floating Background Elements -->
+  <div class="floating-element"></div>
+  <div class="floating-element"></div>
+  <div class="floating-element"></div>
+
   <header>
-    <button class="theme-toggle">Toggle Theme</button>
+    <button class="theme-toggle animate__animated animate__pulse animate__infinite">Toggle Theme</button>
     <div class="container">
       <h1><span class="typing" id="typed-text"></span></h1>
       <nav>
-        <a href="#about">About Me</a>
-        <a href="#work">My School</a>
-        <a href="#contact">Contact</a>
-        <a href="#discord">Discord</a>
+        <a href="#about" class="animate__animated animate__fadeInDown" style="animation-delay: 0.1s">About Me</a>
+        <a href="#work" class="animate__animated animate__fadeInDown" style="animation-delay: 0.2s">Random</a>
+        <a href="#contact" class="animate__animated animate__fadeInDown" style="animation-delay: 0.3s">Contact</a>
+        <a href="#discord" class="animate__animated animate__fadeInDown" style="animation-delay: 0.4s">Discord</a>
+        <a href="#playlist" class="animate__animated animate__fadeInDown" style="animation-delay: 0.5s">Playlist</a>
       </nav>
     </div>
   </header>
 
   <div class="container">
-    <section id="about" class="main">
-      <h2>A Little About Me</h2>
-      <p>Hello! My name is Aditya Bajpai. I am a student with a passion for learning how the internet works. I specialize in creating basic Word documents, PowerPoint presentations, and more. I've been a student for about 15 years and aim to show how even simple things can be done with love and creativity!</p>
+    <section id="about" class="main animate__animated animate__fadeInUp">
+      <h2 class="animate__animated animate__fadeInLeft"> About Me</h2>
+      <p class="animate__animated animate__fadeInRight" style="animation-delay: 0.2s">If u made it here congo on finding tis lil easter egg , and u dont actually need my intro. i do daily shi </p>
     </section>
 
-    <section id="work" class="main">
-      <h2>My School</h2>
-      <p>I study at St. Joseph's College. It's wonderful to meet my friends every day, learn something new, and face small challenges that help me grow.</p>
-      <p>Here are some of my Achievements:</p>
+    <section id="work" class="main animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
+      <h2 class="animate__animated animate__fadeInLeft"> Random Shi</h2>
+      <p class="animate__animated animate__fadeInRight" style="animation-delay: 0.2s">I'm involved in sum activities and enjoy doin shi with my gng.</p>
+      <p>Some of my notable shi i did include:</p>
       <ul>
-        <li><strong>Achievement 1:</strong> Member of NCC Unit, Got 'A' certificate with 'A' grade.</li>
-        <li><strong>Achievement 2:</strong> Worked with Shaurya & Satwik on a PowerPoint for the Association of Luminaries.</li>
-        <li><strong>Achievement 3:</strong> Collaborated with Hydiansh on a PowerPoint for the IT Association.</li>
-        <li><strong>Achievement 4:</strong> Teamed up with Daksh, Hridyansh & Ajinkya Verdhan for a biology project on cell development for the Science Association.</li>
-        <li><strong>Achievement 5:</strong> Certificate of merit in the Inder Mohan Sethi Debate Competition.</li>
+        <li style="--i: 1"><strong>Activity 1:</strong> NCC Unit, Got 'A' certificate with 'A' grade. <span class="achievement-badge">NCC</span></li>
+        <li style="--i: 2"><strong>Activity 2:</strong> Worked with GoSu & JohnWik on a PowerPoinT for the Association of Luminaries. <span class="achievement-badge">Team Work</span></li>
+        <li style="--i: 3"><strong>Activity 3:</strong> Did Shi with HRI on a PowerPoint for the IT Association.<span class="achievement-badge">Tech</span></li>
+        <li style="--i: 4"><strong>Activity 4:</strong> Teamed with Daksh, HRI & Ajinks for a biology project on cell development for the Science Association.<span class="achievement-badge">Science</span></li>
+        <li style="--i: 5"><strong>Activity 5:</strong> Debate and public speaking <span class="achievement-badge">Debate</span></li>
+        <li style="--i: 6"><strong>Activity 6:</strong> Did announcing and sum shi in JoFest.<span class="achievement-badge">Fked it up btw</span></li>
       </ul>
     </section>
 
-    <section id="contact" class="main">
-      <h2>Contact Me</h2>
-      <p>If you would like to get in touch, you can reach me at:</p>
-      <p>Email: <a href="mailto:aiyapi@proton.me">aiyapi@proton.me</a></p>
-      <p>Feel free to reach out for collaboration or any inquiries.</p>
+    <section id="contact" class="main animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+      <h2 class="animate__animated animate__fadeInLeft">Contact Me</h2>
+      <p class="animate__animated animate__fadeInRight" style="animation-delay: 0.2s">You can reach me at:</p>
+      <p class="animate__animated animate__fadeInRight" style="animation-delay: 0.3s">Email: <a href="mailto:kendric@keemail.me" class="animate__animated animate__pulse animate__infinite">kendric@keemail.me</a></p>
+      <p class="animate__animated animate__fadeInRight" style="animation-delay: 0.4s">Feel free to reach out for collab or any dope shi.</p>
     </section>
 
-    <section id="discord" class="main">
-      <h2>Join My Discord Server</h2>
-      <p>Come hang out, ask questions, or just vibe with the community!</p>
+    <section id="discord" class="main animate__animated animate__fadeInUp" style="animation-delay: 0.3s">
+      <h2 class="animate__animated animate__fadeInLeft">💬 Join My Discord Server</h2>
+      <p class="animate__animated animate__fadeInRight" style="animation-delay: 0.2s">Come hang out, do shi or just do more shi here</p>
       <iframe src="https://discord.com/widget?id=1358872595604181155&theme=dark"
               width="100%" height="500"
               allowtransparency="true" frameborder="0"
-              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-      <div class="discord-stats loading" id="discordStats">Loading server stats...</div>
+              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+              class="animate__animated animate__fadeInUp" style="animation-delay: 0.4s; animation: none;"></iframe>
+      <div class="discord-stats" id="discordStats">
+        <div class="loading">Loading server stats...</div>
+      </div>
+    </section>
+
+    <!-- Spotify Playlist Section -->
+    <section id="playlist" class="main spotify-section animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
+      <h2 class="animate__animated animate__fadeInLeft">🎵 Now Listening</h2>
+      <p class="animate__animated animate__fadeInRight" style="animation-delay: 0.2s">Check out our playlist by homies</p>
+      <iframe data-testid="embed-iframe" style="border-radius:12px; animation: none;" src="https://open.spotify.com/embed/playlist/3icVBHIgT6nREHVDIRL3PX?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" class="animate__animated animate__fadeInUp" style="animation-delay: 0.6s; animation: none;"></iframe>
     </section>
   </div>
 
   <footer>
-    <p>&copy; 2025 - Aditya Bajpai. All rights reserved :) Thanks for visiting!</p>
+    <p>&copy; 2027 - π  All rights reserved :)</p>
   </footer>
 
   <button id="scrollTopBtn">↑ Top</button>
-  <div class="toast" id="toast">Welcome to Aditya Bajπ's Website!</div>
+  <div class="toast" id="toast">👋 Welcome to π's Website!</div>
 
   <script>
     // Typing effect
-    const text = "Aditya Bajpai";
+    const text = "π - 3.1415";
     const typedText = document.getElementById("typed-text");
     typedText.textContent = '';
     let i = 0;
@@ -253,61 +694,156 @@
     }
     typeWriter();
 
-    // Smooth scroll
+    // Smooth scroll with enhanced animation
     document.querySelectorAll('nav a').forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
         const target = document.querySelector(link.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+          // Add bounce animation to target
+          target.classList.add('animate__animated', 'animate__bounce');
+          setTimeout(() => {
+            target.classList.remove('animate__animated', 'animate__bounce');
+          }, 1000);
+        }
       });
     });
 
-    // Animate sections on scroll
+    // Animate sections on scroll with Intersection Observer
     const sections = document.querySelectorAll(".main");
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
+          entry.target.classList.add("visible", "animate__animated", "animate__fadeInUp");
         }
       });
     }, { threshold: 0.1 });
     sections.forEach(section => observer.observe(section));
 
-    // Theme toggle
+    // Theme toggle with animation
     document.querySelector(".theme-toggle").addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
+      // Add rotation animation to theme toggle
+      document.querySelector(".theme-toggle").classList.add("animate__animated", "animate__rotateIn");
+      setTimeout(() => {
+        document.querySelector(".theme-toggle").classList.remove("animate__animated", "animate__rotateIn");
+      }, 1000);
     });
 
-    // Toast message
+    // Toast message with enhanced animation
     const toast = document.getElementById("toast");
-    setTimeout(() => toast.classList.add("show"), 1000);
-    setTimeout(() => toast.classList.remove("show"), 5000);
+    setTimeout(() => {
+      toast.classList.add("show", "animate__animated", "animate__bounceInRight");
+    }, 1000);
+    setTimeout(() => {
+      toast.classList.remove("show");
+      toast.classList.add("animate__animated", "animate__bounceOutRight");
+    }, 5000);
 
-    // Scroll to top button
+    // Scroll to top button with animation
     const scrollTopBtn = document.getElementById("scrollTopBtn");
     window.addEventListener("scroll", () => {
-      scrollTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
+      if (window.scrollY > 300) {
+        scrollTopBtn.style.display = "block";
+        scrollTopBtn.classList.add("animate__animated", "animate__fadeIn");
+      } else {
+        scrollTopBtn.style.display = "none";
+      }
     });
     scrollTopBtn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
+      scrollTopBtn.classList.add("animate__animated", "animate__bounce");
+      setTimeout(() => {
+        scrollTopBtn.classList.remove("animate__animated", "animate__bounce");
+      }, 1000);
     });
 
-    // Fetch Discord JSON API Data
+    // Fetch Discord JSON API Data - Clean version
     const discordStats = document.getElementById("discordStats");
+    
+    // Add hover effect with JavaScript
+    discordStats.addEventListener('mouseenter', () => {
+      discordStats.style.transform = 'translateX(10px)';
+    });
+    
+    discordStats.addEventListener('mouseleave', () => {
+      discordStats.style.transform = 'translateX(0)';
+    });
+
     fetch("https://discord.com/api/guilds/1358872595604181155/widget.json")
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
       .then(data => {
-        discordStats.classList.remove("loading");
         discordStats.innerHTML = `
-          <p><span>Server Name:</span> ${data.name}</p>
-          <p><span>Online Members:</span> ${data.presence_count}</p>
+          <p><span>📊 Server Name</span> ${data.name}</p>
+          <p><span>👥 Online Members</span> ${data.presence_count}</p>
         `;
+        
+        // Add smooth fade in
+        discordStats.style.opacity = '0';
+        setTimeout(() => {
+          discordStats.style.transition = 'opacity 0.5s ease';
+          discordStats.style.opacity = '1';
+        }, 100);
       })
       .catch(err => {
-        discordStats.classList.remove("loading");
-        discordStats.innerHTML = "Could not load Discord server stats.";
+        discordStats.innerHTML = `
+          <p style="color: #ff6b6b;">❌ Could not load Discord server stats.</p>
+          <p style="font-size: 14px;">Please try again later.</p>
+        `;
         console.error("Discord API error:", err);
       });
+
+    // Parallax effect on scroll
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const floatingElements = document.querySelectorAll('.floating-element');
+      floatingElements.forEach((element, index) => {
+        const speed = 0.3 + (index * 0.1);
+        const rotate = scrolled * 0.01;
+        element.style.transform = `translateY(${scrolled * speed}px) rotate(${rotate}deg)`;
+      });
+    });
+
+    // Add click animation to all cards
+    document.querySelectorAll('.main').forEach(card => {
+      card.addEventListener('click', function(e) {
+        if (!e.target.closest('a') && !e.target.closest('iframe')) {
+          this.classList.add('animate__animated', 'animate__headShake');
+          setTimeout(() => {
+            this.classList.remove('animate__animated', 'animate__headShake');
+          }, 1000);
+        }
+      });
+    });
+
+    // Dynamic highlight on scroll
+    window.addEventListener('scroll', () => {
+      const scrollPosition = window.scrollY;
+      document.querySelectorAll('.main h2').forEach(heading => {
+        const rect = heading.getBoundingClientRect();
+        if (rect.top < window.innerHeight/2 && rect.bottom > 0) {
+          heading.classList.add('js-highlight');
+        } else {
+          heading.classList.remove('js-highlight');
+        }
+      });
+    });
+
+    // Achievement badges hover effect
+    document.querySelectorAll('.achievement-badge').forEach(badge => {
+      badge.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.2) rotate(5deg)';
+      });
+      badge.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1) rotate(0deg)';
+      });
+    });
   </script>
 </body>
 </html>
