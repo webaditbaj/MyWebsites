@@ -23,6 +23,10 @@
       --shadow-sm: 0 5px 20px rgba(0,0,0,0.1);
       --shadow-md: 0 8px 30px rgba(0,0,0,0.15);
       --shadow-lg: 0 15px 40px rgba(0,0,0,0.2);
+      
+      /* Performance Optimizations */
+      --animation-speed: 0.3s;
+      --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     body.dark-mode {
@@ -44,45 +48,49 @@
       letter-spacing: -0.02em;
       line-height: 1.6;
       overflow-x: hidden;
+      /* Performance Optimizations */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
     }
 
-    /* Floating Animation */
+    /* Optimized Floating Animation - using transform only */
     @keyframes float {
       0% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
+      50% { transform: translateY(-15px); }
       100% { transform: translateY(0px); }
     }
 
-    /* Pulse Animation */
+    /* Optimized Pulse Animation - using transform only */
     @keyframes pulse {
       0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+      50% { transform: scale(1.03); }
       100% { transform: scale(1); }
     }
 
-    /* Glow Animation */
+    /* Optimized Glow Animation - using box-shadow only */
     @keyframes glow {
-      0% { box-shadow: 0 0 5px rgba(0,90,255,0.5); }
-      50% { box-shadow: 0 0 20px rgba(0,90,255,0.8); }
-      100% { box-shadow: 0 0 5px rgba(0,90,255,0.5); }
+      0% { box-shadow: 0 0 5px rgba(0,90,255,0.3); }
+      50% { box-shadow: 0 0 15px rgba(0,90,255,0.5); }
+      100% { box-shadow: 0 0 5px rgba(0,90,255,0.3); }
     }
 
-    /* Shimmer Animation */
+    /* Optimized Shimmer Animation - using transform only */
     @keyframes shimmer {
-      0% { background-position: -1000px 0; }
-      100% { background-position: 1000px 0; }
+      0% { transform: rotate(45deg) translateX(-100%); }
+      100% { transform: rotate(45deg) translateX(100%); }
     }
 
-    /* Bounce Animation */
+    /* Optimized Bounce Animation */
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-5px); }
     }
 
-    /* Slide In Animation */
+    /* Optimized Slide In Animation */
     @keyframes slideIn {
       from {
-        transform: translateX(-100%);
+        transform: translateX(-30px);
         opacity: 0;
       }
       to {
@@ -91,10 +99,10 @@
       }
     }
 
-    /* Fade In Up Animation */
+    /* Optimized Fade In Up Animation */
     @keyframes fadeInUp {
       from {
-        transform: translateY(50px);
+        transform: translateY(30px);
         opacity: 0;
       }
       to {
@@ -103,16 +111,17 @@
       }
     }
 
-    /* New enhanced animations */
+    /* Optimized gradient shift - using background-position only */
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
+    /* Optimized scale pulse */
     @keyframes scalePulse {
       0% { transform: scale(1); }
-      50% { transform: scale(1.02); }
+      50% { transform: scale(1.01); }
       100% { transform: scale(1); }
     }
 
@@ -130,7 +139,7 @@
       z-index: 2;
     }
 
-    /* Animated Background */
+    /* Optimized Animated Background - reduced complexity */
     body::before {
       content: '';
       position: fixed;
@@ -138,12 +147,13 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: radial-gradient(circle at 20% 50%, rgba(0,90,255,0.1) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 80%, rgba(255,165,0,0.1) 0%, transparent 50%);
+      background: radial-gradient(circle at 30% 40%, rgba(0,90,255,0.05) 0%, transparent 60%),
+                  radial-gradient(circle at 70% 60%, rgba(255,165,0,0.05) 0%, transparent 60%);
       pointer-events: none;
       z-index: 0;
-      animation: gradientShift 15s ease infinite;
-      background-size: 200% 200%;
+      animation: gradientShift 20s ease infinite;
+      background-size: 300% 300%;
+      will-change: background-position; /* Performance hint */
     }
 
     header {
@@ -155,29 +165,32 @@
       transition: background-color 0.6s ease, color 0.6s ease;
       border-bottom: 4px solid rgba(255,255,255,0.1);
       overflow: hidden;
-      animation: slideIn 1s ease-out;
+      animation: slideIn 0.8s ease-out;
+      will-change: transform, opacity; /* Performance hint */
     }
 
-    /* Animated Header Background */
+    /* Optimized Animated Header Background - simpler animation */
     header::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
-      animation: shimmer 8s linear infinite;
+      top: -100%;
+      left: -100%;
+      width: 300%;
+      height: 300%;
+      background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
+      animation: shimmer 6s linear infinite;
       transform: rotate(45deg);
+      will-change: transform; /* Performance hint */
     }
 
     header h1 {
       font-size: 3rem;
       margin-bottom: 10px;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-      animation: float 6s ease-in-out infinite;
+      animation: float 8s ease-in-out infinite;
       position: relative;
       display: inline-block;
+      will-change: transform; /* Performance hint */
     }
 
     header h1::after {
@@ -188,7 +201,7 @@
       width: 100%;
       height: 3px;
       background: linear-gradient(90deg, transparent, #fff, transparent);
-      animation: shimmer 2s linear infinite;
+      animation: shimmer 3s linear infinite;
     }
 
     header h1 span.typing {
@@ -211,15 +224,14 @@
       font-size: 18px;
       font-weight: 500;
       position: relative;
-      transition: all 0.3s ease;
+      transition: all 0.3s var(--animation-timing);
       text-transform: uppercase;
       letter-spacing: 1px;
       display: inline-block;
     }
 
     nav a:hover {
-      transform: translateY(-3px);
-      animation: pulse 1s ease-in-out;
+      transform: translateY(-2px);
     }
 
     nav a::after {
@@ -230,7 +242,7 @@
       bottom: -8px;
       left: 0;
       background: #77b5fe;
-      transition: width 0.3s;
+      transition: width 0.3s var(--animation-timing);
       border-radius: 2px;
     }
 
@@ -249,18 +261,17 @@
       cursor: pointer;
       font-size: 14px;
       font-weight: 600;
-      transition: all 0.3s ease;
+      transition: all 0.3s var(--animation-timing);
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       text-transform: uppercase;
       letter-spacing: 0.5px;
       z-index: 10;
-      animation: pulse 3s ease-in-out infinite;
+      will-change: transform; /* Performance hint */
     }
 
     .theme-toggle:hover {
-      transform: translateY(-2px) scale(1.05);
+      transform: translateY(-2px) scale(1.02);
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      animation: none;
     }
 
     body.dark-mode .theme-toggle {
@@ -274,23 +285,24 @@
       margin-top: 30px;
       border-radius: 20px;
       box-shadow: var(--shadow-md);
-      transform: translateY(50px);
+      transform: translateY(30px);
       opacity: 0;
-      transition: all 1s ease, background-color 0.6s ease, color 0.6s ease;
+      transition: all 0.6s var(--animation-timing), background-color 0.6s ease, color 0.6s ease;
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255,255,255,0.1);
       position: relative;
       overflow: hidden;
-      animation: fadeInUp 1s ease-out forwards;
+      animation: fadeInUp 0.8s ease-out forwards;
+      will-change: transform, opacity; /* Performance hint */
     }
 
     .main:hover {
-      transform: translateY(-5px) scale(1.02);
+      transform: translateY(-3px) scale(1.01);
       box-shadow: var(--shadow-lg);
-      transition: all 0.3s ease;
+      transition: all 0.3s var(--animation-timing);
     }
 
-    /* Card Shimmer Effect */
+    /* Optimized Card Shimmer Effect - only on hover */
     .main::before {
       content: '';
       position: absolute;
@@ -298,8 +310,9 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.8s;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.6s var(--animation-timing);
+      pointer-events: none;
     }
 
     .main:hover::before {
@@ -317,12 +330,12 @@
       color: var(--primary-color);
       position: relative;
       display: inline-block;
-      animation: float 6s ease-in-out infinite;
       background: linear-gradient(90deg, var(--primary-color), #ff6b6b, var(--primary-color));
       background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: gradientShift 5s linear infinite, float 6s ease-in-out infinite;
+      animation: gradientShift 8s linear infinite;
+      will-change: background-position; /* Performance hint */
     }
 
     .main h2::after {
@@ -334,7 +347,6 @@
       height: 4px;
       background: linear-gradient(90deg, var(--primary-color), #ff6b6b);
       border-radius: 2px;
-      animation: scalePulse 2s ease-in-out infinite;
     }
 
     footer {
@@ -346,13 +358,6 @@
       font-family: 'Space Grotesk', sans-serif;
       letter-spacing: 0.5px;
       position: relative;
-      overflow: hidden;
-      /* Removed all animations from footer */
-    }
-
-    /* Footer Shimmer - Removed */
-    footer::before {
-      display: none;
     }
 
     .toast {
@@ -365,11 +370,10 @@
       border-radius: 50px;
       opacity: 0;
       transform: translateY(20px);
-      transition: all 0.5s ease;
+      transition: all 0.5s var(--animation-timing);
       z-index: 999;
       font-weight: 500;
       box-shadow: var(--shadow-md);
-      animation: bounce 2s ease-in-out infinite;
       background-size: 200% 200%;
     }
 
@@ -393,29 +397,28 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       font-size: 14px;
-      transition: all 0.3s ease;
+      transition: all 0.3s var(--animation-timing);
       box-shadow: var(--shadow-sm);
-      animation: glow 2s ease-in-out infinite;
       z-index: 100;
+      will-change: transform; /* Performance hint */
     }
 
     #scrollTopBtn:hover {
-      transform: translateY(-5px) scale(1.1);
+      transform: translateY(-3px) scale(1.05);
       box-shadow: var(--shadow-lg);
-      animation: none;
     }
 
-    /* Iframes - No animations */
+    /* Iframes - optimized */
     iframe {
       max-width: 100%;
       border-radius: 15px;
       box-shadow: var(--shadow-md);
-      transition: all 0.3s ease;
-      /* Removed animation */
+      transition: all 0.3s var(--animation-timing);
+      /* Removed animation completely */
     }
 
     iframe:hover {
-      transform: scale(1.02);
+      transform: scale(1.01);
       box-shadow: var(--shadow-lg);
     }
 
@@ -423,23 +426,21 @@
       color: var(--primary-color);
       text-decoration: none;
       font-weight: 500;
-      transition: all 0.3s ease;
+      transition: all 0.3s var(--animation-timing);
       position: relative;
     }
 
     a:hover {
       color: #0044cc;
-      text-decoration: none;
     }
 
     a:hover::after {
       content: '→';
       position: absolute;
       margin-left: 5px;
-      animation: bounce 0.5s ease-in-out;
     }
 
-    /* Discord Stats - Clean version */
+    /* Discord Stats - optimized */
     .discord-stats {
       margin-top: 20px;
       font-size: 16px;
@@ -448,7 +449,8 @@
       border-radius: 15px;
       font-weight: 500;
       border-left: 4px solid var(--primary-color);
-      transition: all 0.3s ease;
+      transition: all 0.3s var(--animation-timing);
+      will-change: transform; /* Performance hint */
     }
 
     .discord-stats:hover {
@@ -485,7 +487,6 @@
       content: '⏳';
       position: absolute;
       left: 10px;
-      animation: none;
     }
 
     .spotify-section {
@@ -501,14 +502,15 @@
       margin-bottom: 15px;
       padding-left: 25px;
       position: relative;
-      transition: all 0.3s ease;
-      animation: slideIn 0.5s ease-out forwards;
-      animation-delay: calc(var(--i) * 0.1s);
+      transition: all 0.3s var(--animation-timing);
+      animation: slideIn 0.4s ease-out forwards;
+      animation-delay: calc(var(--i) * 0.05s);
       opacity: 0;
+      will-change: transform, opacity; /* Performance hint */
     }
 
     ul li:hover {
-      transform: translateX(10px);
+      transform: translateX(5px);
       color: var(--primary-color);
     }
 
@@ -518,75 +520,49 @@
       left: 0;
       color: var(--primary-color);
       font-weight: bold;
-      animation: bounce 2s ease-in-out infinite;
     }
 
-    /* Floating Elements */
+    /* Optimized Floating Elements - fewer and simpler */
     .floating-element {
       position: fixed;
-      width: 150px;
-      height: 150px;
-      background: radial-gradient(circle, rgba(0,90,255,0.1) 0%, transparent 70%);
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(0,90,255,0.03) 0%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
       z-index: 1;
-      animation: float 15s ease-in-out infinite;
-      filter: blur(20px);
+      filter: blur(30px);
+      will-change: transform; /* Performance hint */
     }
 
     .floating-element:nth-child(1) {
       top: 10%;
       left: 5%;
-      width: 200px;
-      height: 200px;
-      animation-delay: 0s;
-      background: radial-gradient(circle, rgba(255,165,0,0.1) 0%, transparent 70%);
+      animation: float 20s ease-in-out infinite;
     }
 
     .floating-element:nth-child(2) {
       bottom: 15%;
       right: 8%;
-      width: 250px;
-      height: 250px;
-      animation-delay: 3s;
-      background: radial-gradient(circle, rgba(0,90,255,0.1) 0%, transparent 70%);
+      animation: float 25s ease-in-out infinite;
+      animation-delay: -5s;
     }
 
-    .floating-element:nth-child(3) {
-      top: 40%;
-      right: 15%;
-      width: 180px;
-      height: 180px;
-      animation-delay: 6s;
-      background: radial-gradient(circle, rgba(255,105,180,0.1) 0%, transparent 70%);
-    }
+    /* Removed third floating element for better performance */
 
-    /* Glitch Effect for Name */
+    /* Glitch Effect - simplified */
     @keyframes glitch {
-      0% { transform: translate(0); }
-      20% { transform: translate(-2px, 2px); }
-      40% { transform: translate(-2px, -2px); }
-      60% { transform: translate(2px, 2px); }
-      80% { transform: translate(2px, -2px); }
-      100% { transform: translate(0); }
+      0%, 100% { transform: translate(0); }
+      33% { transform: translate(-1px, 1px); }
+      66% { transform: translate(1px, -1px); }
     }
 
     .typing {
-      animation: glitch 3s infinite;
+      animation: glitch 4s infinite;
+      will-change: transform; /* Performance hint */
     }
 
-    /* New JavaScript-enhanced elements */
-    .js-highlight {
-      transition: all 0.3s ease;
-    }
-
-    .js-highlight.active {
-      background: linear-gradient(135deg, rgba(0,90,255,0.2) 0%, rgba(255,165,0,0.2) 100%);
-      transform: scale(1.02);
-      box-shadow: var(--shadow-md);
-    }
-
-    /* Achievement badges */
+    /* Achievement badges - optimized */
     .achievement-badge {
       display: inline-block;
       padding: 3px 10px;
@@ -595,80 +571,79 @@
       border-radius: 20px;
       font-size: 12px;
       margin-left: 10px;
-      transition: all 0.3s ease;
+      transition: all 0.3s var(--animation-timing);
+      will-change: transform; /* Performance hint */
     }
 
     .achievement-badge:hover {
-      transform: rotate(360deg);
+      transform: scale(1.1);
       background: #ff6b6b;
     }
   </style>
 </head>
 <body>
-  <!-- Floating Background Elements -->
-  <div class="floating-element"></div>
+  <!-- Floating Background Elements - reduced to 2 for better performance -->
   <div class="floating-element"></div>
   <div class="floating-element"></div>
 
   <header>
-    <button class="theme-toggle animate__animated animate__pulse animate__infinite">Toggle Theme</button>
+    <button class="theme-toggle">Toggle Theme</button>
     <div class="container">
       <h1><span class="typing" id="typed-text"></span></h1>
       <nav>
-        <a href="#about" class="animate__animated animate__fadeInDown" style="animation-delay: 0.1s">About Me</a>
-        <a href="#work" class="animate__animated animate__fadeInDown" style="animation-delay: 0.2s">Random</a>
-        <a href="#contact" class="animate__animated animate__fadeInDown" style="animation-delay: 0.3s">Contact</a>
-        <a href="#discord" class="animate__animated animate__fadeInDown" style="animation-delay: 0.4s">Discord</a>
-        <a href="#playlist" class="animate__animated animate__fadeInDown" style="animation-delay: 0.5s">Playlist</a>
+        <a href="#about" style="animation: slideIn 0.4s ease-out 0.1s both;">About Me</a>
+        <a href="#work" style="animation: slideIn 0.4s ease-out 0.2s both;">Random</a>
+        <a href="#contact" style="animation: slideIn 0.4s ease-out 0.3s both;">Contact</a>
+        <a href="#discord" style="animation: slideIn 0.4s ease-out 0.4s both;">Discord</a>
+        <a href="#playlist" style="animation: slideIn 0.4s ease-out 0.5s both;">Playlist</a>
       </nav>
     </div>
   </header>
 
   <div class="container">
-    <section id="about" class="main animate__animated animate__fadeInUp">
-      <h2 class="animate__animated animate__fadeInLeft"> About Me</h2>
-      <p class="animate__animated animate__fadeInRight" style="animation-delay: 0.2s">If u made it here congo on finding tis lil easter egg , and u dont actually need my intro. i do daily shi </p>
+    <section id="about" class="main">
+      <h2> About Me</h2>
+      <p>If u made it here congo on finding tis lil easter egg , and u dont actually need my intro. i do daily shi</p>
     </section>
 
-    <section id="work" class="main animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
-      <h2 class="animate__animated animate__fadeInLeft"> Random Shi</h2>
-      <p class="animate__animated animate__fadeInRight" style="animation-delay: 0.2s">I'm involved in sum activities and enjoy doin shi with my gng.</p>
+    <section id="work" class="main">
+      <h2> Random Shi</h2>
+      <p>I'm involved in sum activities and enjoy doin shi with my gng.</p>
       <p>Some of my notable shi i did include:</p>
       <ul>
-        <li style="--i: 1"><strong>Activity 1:</strong> NCC Unit, Got 'A' certificate with 'A' grade. <span class="achievement-badge">NCC</span></li>
+        <li style="--i: 1"><strong>Activity 1:</strong> Did NCC but my ass got shreaded , Got 'A' certificate with 'A' grade. <span class="achievement-badge">NCC</span></li>
         <li style="--i: 2"><strong>Activity 2:</strong> Worked with GoSu & JohnWik on a PowerPoinT for the Association of Luminaries. <span class="achievement-badge">Team Work</span></li>
-        <li style="--i: 3"><strong>Activity 3:</strong> Did Shi with HRI on a PowerPoint for the IT Association.<span class="achievement-badge">Tech</span></li>
-        <li style="--i: 4"><strong>Activity 4:</strong> Teamed with Daksh, HRI & Ajinks for a biology project on cell development for the Science Association.<span class="achievement-badge">Science</span></li>
+        <li style="--i: 3"><strong>Activity 3:</strong> Did Shi with HRI on a PowerPoint for the IT Association.<span class="achievement-badge">Hri mf u did all was make a game that didnt fking work</span></li>
+        <li style="--i: 4"><strong>Activity 4:</strong> Teamed with Daksh, HRI & Ajinks for a biology project on cell development for the Science Association.<span class="achievement-badge">Science&Shit</span></li>
         <li style="--i: 5"><strong>Activity 5:</strong> Debate and public speaking <span class="achievement-badge">Debate</span></li>
         <li style="--i: 6"><strong>Activity 6:</strong> Did announcing and sum shi in JoFest.<span class="achievement-badge">Fked it up btw</span></li>
       </ul>
     </section>
 
-    <section id="contact" class="main animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
-      <h2 class="animate__animated animate__fadeInLeft">Contact Me</h2>
-      <p class="animate__animated animate__fadeInRight" style="animation-delay: 0.2s">You can reach me at:</p>
-      <p class="animate__animated animate__fadeInRight" style="animation-delay: 0.3s">Email: <a href="mailto:kendric@keemail.me" class="animate__animated animate__pulse animate__infinite">kendric@keemail.me</a></p>
-      <p class="animate__animated animate__fadeInRight" style="animation-delay: 0.4s">Feel free to reach out for collab or any dope shi.</p>
+    <section id="contact" class="main">
+      <h2>Contact Me</h2>
+      <p>You can reach me at:</p>
+      <p>Email: <a href="mailto:kendric@keemail.me">kendric@keemail.me</a></p>
+      <p>Feel free to reach out for collab or any dope shi.</p>
     </section>
 
-    <section id="discord" class="main animate__animated animate__fadeInUp" style="animation-delay: 0.3s">
-      <h2 class="animate__animated animate__fadeInLeft">💬 Join My Discord Server</h2>
-      <p class="animate__animated animate__fadeInRight" style="animation-delay: 0.2s">Come hang out, do shi or just do more shi here</p>
+    <section id="discord" class="main">
+      <h2>💬 Join My Discord Server</h2>
+      <p>Come hang out, do shi or just do more shi here</p>
       <iframe src="https://discord.com/widget?id=1358872595604181155&theme=dark"
               width="100%" height="500"
               allowtransparency="true" frameborder="0"
-              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-              class="animate__animated animate__fadeInUp" style="animation-delay: 0.4s; animation: none;"></iframe>
+              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
       <div class="discord-stats" id="discordStats">
         <div class="loading">Loading server stats...</div>
       </div>
     </section>
 
     <!-- Spotify Playlist Section -->
-    <section id="playlist" class="main spotify-section animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
-      <h2 class="animate__animated animate__fadeInLeft">🎵 Now Listening</h2>
-      <p class="animate__animated animate__fadeInRight" style="animation-delay: 0.2s">Check out our playlist by homies</p>
-      <iframe data-testid="embed-iframe" style="border-radius:12px; animation: none;" src="https://open.spotify.com/embed/playlist/3icVBHIgT6nREHVDIRL3PX?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" class="animate__animated animate__fadeInUp" style="animation-delay: 0.6s; animation: none;"></iframe>
+    <section id="playlist" class="main spotify-section">
+      <h2>🎵 Now Listening</h2>
+      <p>Check out our playlist by homies</p>
+      <iframe data-testid="embed-iframe" style="border-radius:12px;" src="https://open.spotify.com/embed/playlist/3icVBHIgT6nREHVDIRL3PX?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </section>
   </div>
 
@@ -680,91 +655,94 @@
   <div class="toast" id="toast">👋 Welcome to π's Website!</div>
 
   <script>
-    // Typing effect
+    // Typing effect - optimized
     const text = "π - 3.1415";
     const typedText = document.getElementById("typed-text");
     typedText.textContent = '';
     let i = 0;
+    
     function typeWriter() {
       if (i < text.length) {
         typedText.textContent += text.charAt(i);
         i++;
-        setTimeout(typeWriter, 150);
+        setTimeout(typeWriter, 120); // Slightly faster typing
       }
     }
-    typeWriter();
+    
+    // Start typing after page load
+    window.addEventListener('load', typeWriter);
 
-    // Smooth scroll with enhanced animation
+    // Smooth scroll with debounced animation
     document.querySelectorAll('nav a').forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
         const target = document.querySelector(link.getAttribute('href'));
         if (target) {
           target.scrollIntoView({ behavior: 'smooth' });
-          // Add bounce animation to target
-          target.classList.add('animate__animated', 'animate__bounce');
+          // Add minimal animation
+          target.style.transform = 'scale(1.01)';
           setTimeout(() => {
-            target.classList.remove('animate__animated', 'animate__bounce');
-          }, 1000);
+            target.style.transform = '';
+          }, 200);
         }
       });
     });
 
-    // Animate sections on scroll with Intersection Observer
+    // Optimized Intersection Observer with lower threshold
     const sections = document.querySelectorAll(".main");
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("visible", "animate__animated", "animate__fadeInUp");
+          entry.target.classList.add("visible");
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.1, rootMargin: '50px' }); // Added rootMargin for better performance
     sections.forEach(section => observer.observe(section));
 
-    // Theme toggle with animation
+    // Theme toggle with optimized animation
     document.querySelector(".theme-toggle").addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
-      // Add rotation animation to theme toggle
-      document.querySelector(".theme-toggle").classList.add("animate__animated", "animate__rotateIn");
-      setTimeout(() => {
-        document.querySelector(".theme-toggle").classList.remove("animate__animated", "animate__rotateIn");
-      }, 1000);
     });
 
-    // Toast message with enhanced animation
+    // Toast message - simplified
     const toast = document.getElementById("toast");
     setTimeout(() => {
-      toast.classList.add("show", "animate__animated", "animate__bounceInRight");
+      toast.classList.add("show");
     }, 1000);
+    
     setTimeout(() => {
       toast.classList.remove("show");
-      toast.classList.add("animate__animated", "animate__bounceOutRight");
     }, 5000);
 
-    // Scroll to top button with animation
+    // Optimized scroll to top button
     const scrollTopBtn = document.getElementById("scrollTopBtn");
+    
+    // Throttled scroll event for better performance
+    let ticking = false;
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        scrollTopBtn.style.display = "block";
-        scrollTopBtn.classList.add("animate__animated", "animate__fadeIn");
-      } else {
-        scrollTopBtn.style.display = "none";
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (window.scrollY > 300) {
+            scrollTopBtn.style.display = "block";
+            scrollTopBtn.style.opacity = '1';
+          } else {
+            scrollTopBtn.style.display = "none";
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     });
+    
     scrollTopBtn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
-      scrollTopBtn.classList.add("animate__animated", "animate__bounce");
-      setTimeout(() => {
-        scrollTopBtn.classList.remove("animate__animated", "animate__bounce");
-      }, 1000);
     });
 
-    // Fetch Discord JSON API Data - Clean version
+    // Fetch Discord stats with error handling
     const discordStats = document.getElementById("discordStats");
     
-    // Add hover effect with JavaScript
     discordStats.addEventListener('mouseenter', () => {
-      discordStats.style.transform = 'translateX(10px)';
+      discordStats.style.transform = 'translateX(5px)';
     });
     
     discordStats.addEventListener('mouseleave', () => {
@@ -773,9 +751,7 @@
 
     fetch("https://discord.com/api/guilds/1358872595604181155/widget.json")
       .then(res => {
-        if (!res.ok) {
-          throw new Error('Network response was not ok');
-        }
+        if (!res.ok) throw new Error('Network error');
         return res.json();
       })
       .then(data => {
@@ -784,66 +760,46 @@
           <p><span>👥 Online Members</span> ${data.presence_count}</p>
         `;
         
-        // Add smooth fade in
-        discordStats.style.opacity = '0';
-        setTimeout(() => {
-          discordStats.style.transition = 'opacity 0.5s ease';
+        // Simple fade in
+        requestAnimationFrame(() => {
           discordStats.style.opacity = '1';
-        }, 100);
+        });
       })
       .catch(err => {
         discordStats.innerHTML = `
-          <p style="color: #ff6b6b;">❌ Could not load Discord server stats.</p>
-          <p style="font-size: 14px;">Please try again later.</p>
+          <p style="color: #ff6b6b;">❌ Could not load Discord stats , nga u using ad block or smt or u might be using brave or firefox , so its not my Fking Problem</p>
         `;
-        console.error("Discord API error:", err);
       });
 
-    // Parallax effect on scroll
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const floatingElements = document.querySelectorAll('.floating-element');
+    // Optimized parallax effect - using requestAnimationFrame
+    const floatingElements = document.querySelectorAll('.floating-element');
+    
+    function updateParallax() {
+      const scrolled = window.scrollY;
       floatingElements.forEach((element, index) => {
-        const speed = 0.3 + (index * 0.1);
-        const rotate = scrolled * 0.01;
-        element.style.transform = `translateY(${scrolled * speed}px) rotate(${rotate}deg)`;
+        const speed = 0.2 + (index * 0.1);
+        element.style.transform = `translateY(${scrolled * speed * 0.5}px)`;
       });
-    });
+      requestAnimationFrame(updateParallax);
+    }
+    
+    // Start parallax only if needed
+    if (floatingElements.length > 0) {
+      requestAnimationFrame(updateParallax);
+    }
 
-    // Add click animation to all cards
-    document.querySelectorAll('.main').forEach(card => {
-      card.addEventListener('click', function(e) {
-        if (!e.target.closest('a') && !e.target.closest('iframe')) {
-          this.classList.add('animate__animated', 'animate__headShake');
-          setTimeout(() => {
-            this.classList.remove('animate__animated', 'animate__headShake');
-          }, 1000);
-        }
-      });
-    });
-
-    // Dynamic highlight on scroll
-    window.addEventListener('scroll', () => {
-      const scrollPosition = window.scrollY;
-      document.querySelectorAll('.main h2').forEach(heading => {
-        const rect = heading.getBoundingClientRect();
-        if (rect.top < window.innerHeight/2 && rect.bottom > 0) {
-          heading.classList.add('js-highlight');
-        } else {
-          heading.classList.remove('js-highlight');
-        }
-      });
-    });
-
-    // Achievement badges hover effect
+    // Achievement badges hover effect - optimized with CSS transitions
     document.querySelectorAll('.achievement-badge').forEach(badge => {
       badge.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.2) rotate(5deg)';
+        this.style.transform = 'scale(1.1)';
       });
       badge.addEventListener('mouseleave', function() {
-        this.style.transform = 'scale(1) rotate(0deg)';
+        this.style.transform = 'scale(1)';
       });
     });
+
+    // Remove heavy JavaScript animations that cause lag
+    // Removed: random pulse intervals, click animations, dynamic highlight
   </script>
 </body>
 </html>
