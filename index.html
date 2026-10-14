@@ -579,6 +579,76 @@
       transform: scale(1.1);
       background: #ff6b6b;
     }
+
+    /* ===== Music section (tabs + click-to-load embeds) ===== */
+    .music-tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .music-tab {
+      padding: 10px 18px;
+      border: 2px solid var(--primary-color);
+      border-radius: 30px;
+      background: transparent;
+      color: var(--primary-color);
+      font-weight: 600;
+      font-family: inherit;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.3s var(--animation-timing);
+    }
+
+    .music-tab.active,
+    .music-tab:hover {
+      background: var(--primary-color);
+      color: #fff;
+    }
+
+    .music-panel {
+      display: none;
+    }
+
+    .music-panel.active {
+      display: block;
+    }
+
+    .embed-slot {
+      margin-bottom: 15px;
+    }
+
+    .embed-slot iframe {
+      width: 100%;
+      max-width: 660px;
+      border: 0;
+      display: block;
+    }
+
+    .load-btn {
+      width: 100%;
+      max-width: 660px;
+      padding: 30px;
+      border: 2px dashed var(--primary-color);
+      border-radius: 12px;
+      background: rgba(0,90,255,0.05);
+      color: var(--primary-color);
+      font-weight: 600;
+      font-size: 16px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.3s var(--animation-timing);
+    }
+
+    .load-btn:hover {
+      background: rgba(0,90,255,0.12);
+    }
+
+    .direct-link {
+      display: inline-block;
+      margin: 5px 20px 5px 0;
+    }
   </style>
 </head>
 <body>
@@ -639,15 +709,56 @@
       </div>
     </section>
 
-    <!-- Spotify Playlist Section -->
+    <!-- Music Section: Spotify / Tidal / Apple Music -->
     <section id="playlist" class="main spotify-section">
       <h2>🎵 Now Listening</h2>
       <p>Check out our playlist by homies</p>
-      <iframe data-testid="embed-iframe" style="border-radius:12px;" src="https://open.spotify.com/embed/playlist/3icVBHIgT6nREHVDIRL3PX?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      <iframe src="https://embed.tidal.com/tracks/4875682" width="500" height="120" allow="encrypted-media; fullscreen; clipboard-write https://embed.tidal.com; web-share" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox" style="color-scheme: light dark" title="TIDAL Embed Player" />
-   <iframe src="https://embed.tidal.com/albums/4875681" width="500" height="275" allow="encrypted-media; fullscreen; clipboard-write https://embed.tidal.com; web-share" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox" style="color-scheme: light dark" title="TIDAL Embed Player" />
-  <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/song/borderline/1497230972"></iframe>
-   </section>
+
+      <div class="music-tabs">
+        <button class="music-tab active" data-target="spotify">Spotify</button>
+        <button class="music-tab" data-target="tidal">Tidal</button>
+        <button class="music-tab" data-target="apple">Apple Music</button>
+      </div>
+
+      <!-- SPOTIFY -->
+      <div class="music-panel active" id="spotify">
+        <div class="embed-slot" data-height="352"
+             data-src="https://open.spotify.com/embed/playlist/3icVBHIgT6nREHVDIRL3PX"
+             data-allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+          <button class="load-btn">▶ Load Spotify player</button>
+        </div>
+        <a class="direct-link" href="https://open.spotify.com/playlist/3icVBHIgT6nREHVDIRL3PX" target="_blank" rel="noopener noreferrer">Open in Spotify</a>
+      </div>
+
+      <!-- TIDAL -->
+      <div class="music-panel" id="tidal">
+        <div class="embed-slot" data-height="120"
+             data-src="https://embed.tidal.com/tracks/4875682"
+             data-allow="encrypted-media; fullscreen; clipboard-write; web-share"
+             data-sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox">
+          <button class="load-btn">▶ Load Tidal track</button>
+        </div>
+        <div class="embed-slot" data-height="275"
+             data-src="https://embed.tidal.com/albums/4875681"
+             data-allow="encrypted-media; fullscreen; clipboard-write; web-share"
+             data-sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox">
+          <button class="load-btn">▶ Load Tidal album</button>
+        </div>
+        <a class="direct-link" href="https://tidal.com/browse/track/4875682" target="_blank" rel="noopener noreferrer">Track on Tidal</a>
+        <a class="direct-link" href="https://tidal.com/browse/album/4875681" target="_blank" rel="noopener noreferrer">Album on Tidal</a>
+      </div>
+
+      <!-- APPLE MUSIC -->
+      <div class="music-panel" id="apple">
+        <div class="embed-slot" data-height="175"
+             data-src="https://embed.music.apple.com/us/song/borderline/1497230972"
+             data-allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+             data-sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation">
+          <button class="load-btn">▶ Load Apple Music player</button>
+        </div>
+        <a class="direct-link" href="https://music.apple.com/us/song/borderline/1497230972" target="_blank" rel="noopener noreferrer">Open in Apple Music</a>
+      </div>
+    </section>
   </div>
 
   <footer>
@@ -801,8 +912,29 @@
       });
     });
 
-    // Remove heavy JavaScript animations that cause lag
-    // Removed: random pulse intervals, click animations, dynamic highlight
+    // ===== Music tabs =====
+    document.querySelectorAll('.music-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.music-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.music-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.target).classList.add('active');
+      });
+    });
+
+    // ===== Click-to-load embeds (no third-party requests until the visitor clicks) =====
+    document.querySelectorAll('.embed-slot').forEach(slot => {
+      slot.querySelector('.load-btn').addEventListener('click', () => {
+        const f = document.createElement('iframe');
+        f.src = slot.dataset.src;
+        f.height = slot.dataset.height;
+        f.allow = slot.dataset.allow || '';
+        f.title = 'Music player';
+        f.loading = 'lazy';
+        if (slot.dataset.sandbox) f.setAttribute('sandbox', slot.dataset.sandbox);
+        slot.replaceChildren(f);
+      });
+    });
  </script>
 
   <script src="https://keepandroidopen.org/banner.js"></script>
